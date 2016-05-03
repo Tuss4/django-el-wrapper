@@ -1,0 +1,19 @@
+db:
+    image: postgres:9.5
+    environment:
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=postgres
+es:
+    image: elasticsearch:2.3.2
+api:
+    build: .
+    ports:
+        - "5000:5000"
+    links:
+        - db
+        - es
+    volumes:
+        - .:/code:rw
+    command: python manage.py runserver 0.0.0.0:5000
+    env_file:
+        - ./secret_env/local.env
