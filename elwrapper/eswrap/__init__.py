@@ -5,5 +5,18 @@ TYPE_MAP = {
     'timestamp with time zone': 'date',
     'timestamp': 'date',
     'date': 'date',
-    'boolean': 'boolean'
+    'boolean': 'boolean',
+    'bytea': 'binary',
+    'jsonb': 'object',
+    'json': 'object'
 }
+
+
+MAPPING_TEMPLATE = """{
+    "mappings": {
+        "%s": {
+            "properties": %s
+        }
+    }
+}
+"""
