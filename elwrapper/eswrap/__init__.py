@@ -12,7 +12,7 @@ TYPE_MAP = {
 }
 
 
-MAPPING_TEMPLATE = """{
+MAPPING_TEMPLATE = """%s_mapping = {
     "mappings": {
         "%s": {
             "properties": %s
