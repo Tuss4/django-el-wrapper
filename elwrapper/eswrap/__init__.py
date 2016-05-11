@@ -6,6 +6,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 assert DATABASE_URL
 
 TYPE_MAP = {  # Maps PostgreSQL data type keys to Elasticsearch data type vals
+    'serial primary key': 'integer',
     'integer': 'integer',
     'character varying': 'string',
     'text': 'string',
