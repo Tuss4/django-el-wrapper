@@ -1,19 +1,6 @@
-import psycopg2
 import os
-from urllib.parse import urlparse
 from .queries import GET_TABLE_SCHEMA
-from . import TYPE_MAP
-
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-assert DATABASE_URL
-
-
-def db_conn():
-    parts = urlparse(DATABASE_URL)
-    return psycopg2.connect(
-        database=parts.path.strip('/'), user=parts.username,
-        password=parts.password, port=parts.port, host=parts.hostname)
+from . import TYPE_MAP, db_conn
 
 
 class Scanner(object):
