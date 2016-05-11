@@ -3,7 +3,6 @@ from .queries import CREATE_TEST_TABLE, DROP_TEST_TABLE
 from . import db_conn
 
 
-
 class ESWrapTest(TestCase):
 
     conn = db_conn()
