@@ -15,25 +15,25 @@ class ESWrapTest(TestCase):
         with self.conn.cursor() as c:
             c.execute(CREATE_TEST_TABLE)
 
-    def tearDown(self):
-        with self.conn.cursor() as c:
-            c.execute(DROP_TEST_TABLE)
-        filename = "test_table_es_mapping.py"
-        files = os.listdir('{}/eswrap'.format(os.getcwd()))
-        if filename in files:
-            cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
-            subprocess.run([cmd], shell=True, check=True)
+    # def tearDown(self):
+    #     with self.conn.cursor() as c:
+    #         c.execute(DROP_TEST_TABLE)
+    #     filename = "foo_table_es_mapping.py"
+    #     files = os.listdir('{}/eswrap'.format(os.getcwd()))
+    #     if filename in files:
+    #         cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
+    #         subprocess.run([cmd], shell=True, check=True)
 
     def test_writer(self):
         w = Writer()
-        w.write_mapping('test_table', 'test_document')
+        w.write_mapping('foo_table', 'foo_document')
         files = os.listdir('{}/eswrap'.format(os.getcwd()))
-        self.assertIn('test_table_es_mapping.py', files)
+        self.assertIn('foo_table_es_mapping.py', files)
 
     def test_scanner(self):
         s = Scanner()
-        props = s.build_props('test_table')
-        print(s.get_table_schema('test_table'))
+        props = s.build_props('foo_table')
+        print(s.get_table_schema('foo_table'))
         print(props)
         self.assertEqual(props['id'], dict(type='integer'))
         self.assertEqual(props['foo'], dict(type='string'))

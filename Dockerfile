@@ -6,6 +6,5 @@ RUN apt-get update && \
 RUN mkdir /code
 COPY . /code/
 RUN cd /code/ && pip install -r requirements.txt
-WORKDIR /code/elwrapper/
+WORKDIR /code/
 EXPOSE 5000
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "elwrapper.wsgi"]

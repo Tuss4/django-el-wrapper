@@ -6,7 +6,7 @@ WHERE  table_name = %s;
 
 
 CREATE_TEST_TABLE = """
-CREATE TABLE test_table(
+CREATE TABLE foo_table (
     id  SERIAL PRIMARY KEY,
     foo TEXT,
     bar TEXT
@@ -14,5 +14,5 @@ CREATE TABLE test_table(
 """
 
 DROP_TEST_TABLE = """
-DROP TABLE IF EXISTS test_table CASCADE;
+DROP TABLE IF EXISTS foo_table CASCADE;
 """

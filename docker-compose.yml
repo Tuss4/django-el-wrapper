@@ -14,6 +14,6 @@ api:
         - es
     volumes:
         - .:/code:rw
-    command: python manage.py runserver 0.0.0.0:5000
+    command: python main.py
     env_file:
         - ./secret_env/local.env
