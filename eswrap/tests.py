@@ -15,14 +15,14 @@ class ESWrapTest(TestCase):
         with self.conn.cursor() as c:
             c.execute(CREATE_TEST_TABLE)
 
-    # def tearDown(self):
-    #     with self.conn.cursor() as c:
-    #         c.execute(DROP_TEST_TABLE)
-    #     filename = "foo_table_es_mapping.py"
-    #     files = os.listdir('{}/eswrap'.format(os.getcwd()))
-    #     if filename in files:
-    #         cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
-    #         subprocess.run([cmd], shell=True, check=True)
+    def tearDown(self):
+        with self.conn.cursor() as c:
+            c.execute(DROP_TEST_TABLE)
+        filename = "foo_table_es_mapping.py"
+        files = os.listdir('{}/eswrap'.format(os.getcwd()))
+        if filename in files:
+            cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
+            subprocess.run([cmd], shell=True, check=True)
 
     def test_writer(self):
         w = Writer()
