@@ -3,9 +3,13 @@ python:
     - "3.5"
 services:
     - postgresql
+    - elasticsearch
 install: "pip install -r requirements.txt"
+before_install:
+  - curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-2.3.2.deb && sudo dpkg -i --force-confnew elasticsearch-2.3.2.deb && sudo service elasticsearch restart
 before_script:
     - psql -c 'create database travis_ci_test;' -U postgres
+    - sleep 10
 script: nosetests
 env:
     - DATABASE_URL=postgres://postgres:@localhost:5432/travis_ci_test
