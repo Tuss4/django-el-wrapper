@@ -13,3 +13,5 @@ before_script:
 script: nosetests
 env:
     - DATABASE_URL=postgres://postgres:@localhost:5432/travis_ci_test
+    - ES_NODE_URL=localhost
+    - ES_NODE_PORT=9200

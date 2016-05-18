@@ -1,5 +1,5 @@
 from unittest import TestCase
-from . import db_conn
+from . import db_conn, es_conn
 from .queries import CREATE_TEST_TABLE, DROP_TEST_TABLE
 from .writer import Writer
 from .scanner import Scanner
@@ -24,6 +24,7 @@ class ESWrapTest(TestCase):
         if filename in files:
             cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
             subprocess.run([cmd], shell=True, check=True)
+        # Add method for clearing indices.
 
     def test_writer(self):
         w = Writer()
@@ -52,3 +53,6 @@ class ESWrapTest(TestCase):
         self.assertEqual(props['id'], dict(type='integer'))
         self.assertEqual(props['foo'], dict(type='string'))
         self.assertEqual(props['bar'], dict(type='string'))
+
+    def test_create_index(self):
+        pass
