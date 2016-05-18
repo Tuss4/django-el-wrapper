@@ -5,12 +5,14 @@ from .writer import Writer
 from .scanner import Scanner
 import os
 import subprocess
+import time
 from importlib import import_module
 
 
 class ESWrapTest(TestCase):
 
     conn = db_conn()
+    es = es_conn()
 
     def setUp(self):
         with self.conn.cursor() as c:
@@ -25,6 +27,8 @@ class ESWrapTest(TestCase):
             cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
             subprocess.run([cmd], shell=True, check=True)
         # Add method for clearing indices.
+        if self.es.indices.exists(index=['test_index']):
+            self.es.indices.delete(index=['test_index'])
 
     def test_writer(self):
         w = Writer()
@@ -55,4 +59,24 @@ class ESWrapTest(TestCase):
         self.assertEqual(props['bar'], dict(type='string'))
 
     def test_create_index(self):
-        pass
+        w = Writer()
+        w.write_mapping('foo_table', 'foo_document')
+        module = import_module('eswrap.foo_table_es_mapping')
+        mapping = getattr(module, 'foo_table_mapping')
+        self.es.indices.create(index='test_index', body=mapping)
+        time.sleep(2)
+        self.assertTrue(self.es.indices.exists(index=['test_index']))
+        actual_mapping = self.es.indices.get_mapping(
+            index=['test_index'], doc_type=['foo_document'])
+        exp_mapping = {
+            'mappings': {
+                'foo_document': {
+                    'properties': {
+                        'foo': {'type': 'string'},
+                        'id': {'type': 'integer'},
+                        'bar': {'type': 'string'}
+                    }
+                }
+            }
+        }
+        self.assertEqual(actual_mapping['test_index'], exp_mapping)
