@@ -7,4 +7,5 @@ RUN mkdir /code
 COPY . /code/
 RUN cd /code/ && pip install -r requirements.txt
 WORKDIR /code/
+RUN pip install .
 EXPOSE 5000

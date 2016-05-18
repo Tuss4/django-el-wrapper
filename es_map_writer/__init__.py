@@ -1,7 +1,13 @@
 import os
+import click
 import psycopg2
 from urllib.parse import urlparse
 from elasticsearch import Elasticsearch
+
+
+@click.command()
+def cli():
+    click.echo('Bruh!')
 
 
 APP_DIR = 'es_map_writer'
