@@ -4,6 +4,9 @@ from urllib.parse import urlparse
 from elasticsearch import Elasticsearch
 
 
+APP_DIR = 'es_map_writer'
+
+
 DATABASE_URL = os.getenv(
     'DATABASE_URL',
     'postgres://postgres:postgres@{}:5432/postgres'.format(os.getenv('DB_1_PORT_5432_TCP_ADDR')))

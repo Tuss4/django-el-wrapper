@@ -1,5 +1,5 @@
 from unittest import TestCase
-from . import db_conn, es_conn
+from . import db_conn, es_conn, APP_DIR
 from .queries import CREATE_TEST_TABLE, DROP_TEST_TABLE
 from .writer import Writer
 from .scanner import Scanner
@@ -22,9 +22,9 @@ class ESWrapTest(TestCase):
         with self.conn.cursor() as c:
             c.execute(DROP_TEST_TABLE)
         filename = "foo_table_es_mapping.py"
-        files = os.listdir('{}/eswrap'.format(os.getcwd()))
+        files = os.listdir('{}/{}'.format(os.getcwd(), APP_DIR))
         if filename in files:
-            cmd = "rm {}/eswrap/{}".format(os.getcwd(), filename)
+            cmd = "rm {}/{}/{}".format(os.getcwd(), APP_DIR, filename)
             subprocess.run([cmd], shell=True, check=True)
         # Add method for clearing indices.
         if self.es.indices.exists(index=['test_index']):
@@ -33,9 +33,9 @@ class ESWrapTest(TestCase):
     def test_writer(self):
         w = Writer()
         w.write_mapping('foo_table', 'foo_document')
-        files = os.listdir('{}/eswrap'.format(os.getcwd()))
+        files = os.listdir('{}/{}'.format(os.getcwd(), APP_DIR))
         self.assertIn('foo_table_es_mapping.py', files)
-        module = import_module('eswrap.foo_table_es_mapping')
+        module = import_module('{}.foo_table_es_mapping'.format(APP_DIR))
         self.assertTrue(hasattr(module, 'foo_table_mapping'))
         mapping = getattr(module, 'foo_table_mapping')
         expected = {
@@ -61,7 +61,7 @@ class ESWrapTest(TestCase):
     def test_create_index(self):
         w = Writer()
         w.write_mapping('foo_table', 'foo_document')
-        module = import_module('eswrap.foo_table_es_mapping')
+        module = import_module('{}.foo_table_es_mapping'.format(APP_DIR))
         mapping = getattr(module, 'foo_table_mapping')
         self.es.indices.create(index='test_index', body=mapping)
         time.sleep(2)
