@@ -5,6 +5,7 @@ from .writer import Writer
 from .scanner import Scanner
 import os
 import subprocess
+from importlib import import_module
 
 
 class ESWrapTest(TestCase):
@@ -29,12 +30,25 @@ class ESWrapTest(TestCase):
         w.write_mapping('foo_table', 'foo_document')
         files = os.listdir('{}/eswrap'.format(os.getcwd()))
         self.assertIn('foo_table_es_mapping.py', files)
+        module = import_module('eswrap.foo_table_es_mapping')
+        self.assertTrue(hasattr(module, 'foo_table_mapping'))
+        mapping = getattr(module, 'foo_table_mapping')
+        expected = {
+            'mappings': {
+                'foo_document': {
+                    'properties': {
+                        'foo': {'type': 'string'},
+                        'id': {'type': 'integer'},
+                        'bar': {'type': 'string'}
+                    }
+                }
+            }
+        }
+        self.assertEqual(mapping, expected)
 
     def test_scanner(self):
         s = Scanner()
         props = s.build_props('foo_table')
-        print(s.get_table_schema('foo_table'))
-        print(props)
         self.assertEqual(props['id'], dict(type='integer'))
         self.assertEqual(props['foo'], dict(type='string'))
         self.assertEqual(props['bar'], dict(type='string'))
