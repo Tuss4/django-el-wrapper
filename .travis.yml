@@ -10,7 +10,6 @@ before_script:
     - psql -c 'create database travis_ci_test;' -U postgres
     - sleep 10
 script:
-    - curl localhost:9200
     - nosetests
 env:
     - DATABASE_URL=postgres://postgres:@localhost:5432/travis_ci_test ES_NODE_URL=127.0.0.1 ES_NODE_PORT=9200
