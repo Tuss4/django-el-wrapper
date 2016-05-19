@@ -7,13 +7,10 @@ es:
     image: elasticsearch:2.3.2
 api:
     build: .
-    ports:
-        - "5000:5000"
     links:
         - db
         - es
     volumes:
         - .:/code:rw
-    command: python main.py
     env_file:
         - ./secret_env/local.env
