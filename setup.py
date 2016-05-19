@@ -11,6 +11,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        mapwrtr=es_map_writer:cli
+        mapwrtr=es_map_writer.command:cli
     ''',
 )
