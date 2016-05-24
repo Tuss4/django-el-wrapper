@@ -5,7 +5,7 @@ from .writer import Writer
 
 @click.command()
 @click.option('--database-url', default=None, help='Postgres URI.')
-@click.option('--file-path', help='Output file destination.')
+@click.option('--file-path', help='Output file destination folder.')
 @click.option('--table-name', help='Postgres table the mapping is being written for.')
 @click.option('--index-name', default=None,
               help='Elasticsearch index name. Will default to the table name if blank.')

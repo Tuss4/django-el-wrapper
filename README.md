@@ -20,10 +20,12 @@ A module that writes an Elasticsearch index mapping for a PostgreSQL database.
 
  Options:
    --database-url TEXT   Postgres URI.
-   --file-path TEXT      Output file destination.
+   --file-path TEXT      Output file destination folder.
    --table-name TEXT     Postgres table the mapping is being written for.
    --index-name TEXT     Elasticsearch index name. Will default to the table
                          name if blank.
    --document-type TEXT  Elasticsearch document type.
    --help                Show this message and exit.
  ```
+
+ File name format: `[table_name]_es_mapping.py`
