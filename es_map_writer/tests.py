@@ -7,6 +7,8 @@ import os
 import subprocess
 import time
 from importlib import import_module
+from click.testing import CliRunner
+from .command import *
 
 
 class ESWrapTest(TestCase):
@@ -80,3 +82,13 @@ class ESWrapTest(TestCase):
             }
         }
         self.assertEqual(actual_mapping['test_index'], exp_mapping)
+
+    def test_click_app(self):
+        runner = CliRunner()
+        result = runner.invoke(cli, [
+            '--database-url={}'.format(DATABASE_URL),
+            '--file-path={}/{}'.format(os.getcwd(), APP_DIR),
+            '--table-name=foo_table',
+            '--document-type=foo_document'])
+        self.assertEqual(result.output, 'Writing map.\n')
+        self.assertEqual(result.exit_code, 0)
