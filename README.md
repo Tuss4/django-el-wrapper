@@ -12,6 +12,7 @@ A module that writes an Elasticsearch index mapping for a PostgreSQL database.
  + PostgreSQL 9+
 
 
+
  **How To Use:**
 
 For help:  
