@@ -16,3 +16,12 @@ CREATE TABLE foo_table (
 DROP_TEST_TABLE = """
 DROP TABLE IF EXISTS foo_table CASCADE;
 """
+
+
+CREATE_KRIDER_TABLE = """
+CREATE TABLE kamen_rider (
+    id        SERIAL PRIMARY KEY,
+    title     TEXT,
+    alter_ego TEXT
+);
+"""

@@ -1,4 +1,5 @@
 import click
+import os
 from .writer import Writer
 
 
@@ -12,6 +13,7 @@ from .writer import Writer
 def cli(database_url, file_path, table_name, index_name, document_type):
     print(database_url)
     print(file_path)
+    print(os.getcwd())
     click.echo('Bruh!')
     w = Writer(database_url)
     w.write_mapping(table_name=table_name, document_type=document_type,
