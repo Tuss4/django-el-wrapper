@@ -9,8 +9,7 @@ A module that writes an Elasticsearch index mapping for a PostgreSQL database.
 + Compatible with:
  + Python 3.5
  + Elasticsearch 2.3.2
- + PostgreSQL 9+
-
+ + PostgreSQL 9+  
 
 
  **How To Use:**
