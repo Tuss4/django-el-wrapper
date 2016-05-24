@@ -5,11 +5,15 @@ import os
 
 class Writer(object):
 
-    def write_mapping(self, table_name, document_type, path=None):
-        s = Scanner()
+    def __init__(self, db_url):
+        self.db_url = db_url
+
+    def write_mapping(self, table_name, document_type, path=None, index_name=None):
+        s = Scanner(self.db_url)
         fields = s.build_props(table_name)
+        index = table_name if not index_name else index_name
         vals = {
-            'map_name': table_name,
+            'map_name': index,
             'doc_type': document_type,
             'fields': fields
         }

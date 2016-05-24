@@ -5,7 +5,8 @@ from . import TYPE_MAP, db_conn
 
 class Scanner(object):
 
-    conn = db_conn()
+    def __init__(self, db_url):
+        self.conn = db_conn(db_url)
 
     def get_table_schema(self, table_name):
         r = None

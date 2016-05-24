@@ -1,5 +1,5 @@
 from unittest import TestCase
-from . import db_conn, es_conn, APP_DIR
+from . import db_conn, es_conn, APP_DIR, DATABASE_URL
 from .queries import CREATE_TEST_TABLE, DROP_TEST_TABLE
 from .writer import Writer
 from .scanner import Scanner
@@ -11,7 +11,7 @@ from importlib import import_module
 
 class ESWrapTest(TestCase):
 
-    conn = db_conn()
+    conn = db_conn(DATABASE_URL)
     es = es_conn()
 
     def setUp(self):
@@ -31,7 +31,7 @@ class ESWrapTest(TestCase):
             self.es.indices.delete(index=['test_index'])
 
     def test_writer(self):
-        w = Writer()
+        w = Writer(DATABASE_URL)
         w.write_mapping('foo_table', 'foo_document')
         files = os.listdir('{}/{}'.format(os.getcwd(), APP_DIR))
         self.assertIn('foo_table_es_mapping.py', files)
@@ -52,14 +52,14 @@ class ESWrapTest(TestCase):
         self.assertEqual(mapping, expected)
 
     def test_scanner(self):
-        s = Scanner()
+        s = Scanner(DATABASE_URL)
         props = s.build_props('foo_table')
         self.assertEqual(props['id'], dict(type='integer'))
         self.assertEqual(props['foo'], dict(type='string'))
         self.assertEqual(props['bar'], dict(type='string'))
 
     def test_create_index(self):
-        w = Writer()
+        w = Writer(DATABASE_URL)
         w.write_mapping('foo_table', 'foo_document')
         module = import_module('{}.foo_table_es_mapping'.format(APP_DIR))
         mapping = getattr(module, 'foo_table_mapping')

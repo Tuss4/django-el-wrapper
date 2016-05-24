@@ -10,7 +10,6 @@ APP_DIR = 'es_map_writer'
 DATABASE_URL = os.getenv(
     'DATABASE_URL',
     'postgres://postgres:postgres@{}:5432/postgres'.format(os.getenv('DB_1_PORT_5432_TCP_ADDR')))
-assert DATABASE_URL
 
 ES_NODE_URL = os.getenv('ES_NODE_URL', '')
 ES_NODE_PORT = int(os.getenv('ES_NODE_PORT', 9200))
@@ -41,8 +40,8 @@ MAPPING_TEMPLATE = """%(map_name)s_mapping = {
 """
 
 
-def db_conn():
-    parts = urlparse(DATABASE_URL)
+def db_conn(db_url):
+    parts = urlparse(db_url)
     db = parts.path.strip('/')
     user = parts.username
     pw = parts.password
