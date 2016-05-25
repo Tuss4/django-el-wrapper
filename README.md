@@ -28,4 +28,17 @@ A command line tool that writes an Elasticsearch index mapping for a PostgreSQL 
    --help                Show this message and exit.
  ```
 
- File name format: `[table_name]_es_mapping.py`
+File name format: `[table_name]_es_mapping.py`
+
+Example:
+We have a table named "superheroes" that we plan on creating an index for on an Elasticsearch node.
+`mapwrtr --database-url=postgres://pguser:pgpass@localhost:5432/mydb --file-path=/home/me/myapps/mapping --table-name=superheroes --document-type=superhero_doc`
+
+This will generate a mapping for my index in `/home/me/myapps/mapping/superheroes_es_mapping.py`
+
+Now when I'm creating (or updating) my superheroes index, I can import the mapping that was generated. If I need to add some custom analyzers and tokenizers, I can do that too.
+
+
+**Note(s):**
++ `--database-url` must be in the Postgres URI format `postgres://user:pass@host:port/database`
++ `--file-path` must be an absolute path eg `/home/me/Documents/myapp/esmapping`
