@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Tuss4/es-map-writer.svg?branch=master)](https://travis-ci.org/Tuss4/es-map-writer)
 
-A module that writes an Elasticsearch index mapping for a PostgreSQL database.
+A command line tool that writes an Elasticsearch index mapping for a PostgreSQL database.
 
 + Compatible with:
  + Python 3.5

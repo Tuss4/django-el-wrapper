@@ -11,6 +11,8 @@ from .writer import Writer
               help='Elasticsearch index name. Will default to the table name if blank.')
 @click.option('--document-type', help='Elasticsearch document type.')
 def cli(database_url, file_path, table_name, index_name, document_type):
+    if not database_url:
+        pass
     click.echo('Writing map.')
     w = Writer(database_url)
     w.write_mapping(table_name=table_name, document_type=document_type,
