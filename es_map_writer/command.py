@@ -12,7 +12,7 @@ from .writer import Writer
 @click.option('--document-type', help='Elasticsearch document type.')
 def cli(database_url, file_path, table_name, index_name, document_type):
     if not database_url:
-        pass
+        raise click.BadParameter('The --database-url cannot be blank.')
     click.echo('Writing map.')
     w = Writer(database_url)
     w.write_mapping(table_name=table_name, document_type=document_type,

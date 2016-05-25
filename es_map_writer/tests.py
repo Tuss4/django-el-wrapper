@@ -92,3 +92,8 @@ class ESWrapTest(TestCase):
             '--document-type=foo_document'])
         self.assertEqual(result.output, 'Writing map.\n')
         self.assertEqual(result.exit_code, 0)
+
+    def test_click_badparam(self):
+        runner = CliRunner()
+        result = runner.invoke(cli, [])
+        self.assertTrue('The --database-url cannot be blank' in result.output)
