@@ -1,6 +1,6 @@
 # ES Map Writer
 
-[![Build Status](https://travis-ci.org/Tuss4/es-map-writer.svg?branch=master)](https://travis-ci.org/Tuss4/es-map-writer)
+[![Build Status](https://travis-ci.org/Tuss4/es-map-writer.svg?branch=master)](https://travis-ci.org/Tuss4/es-map-writer) [![PyPI version](https://badge.fury.io/py/es-map-writer.svg)](https://badge.fury.io/py/es-map-writer)
 
 A command line tool that writes an Elasticsearch index mapping for a PostgreSQL database table.
 
@@ -8,6 +8,12 @@ A command line tool that writes an Elasticsearch index mapping for a PostgreSQL 
  + Python 3.5
  + Elasticsearch 2.3.2
  + PostgreSQL 9+
+
+
+##Installation
+
+`pip install es-map-writer`
+
 
 ## How To Use:
 
