@@ -26,7 +26,8 @@ TYPE_MAP = {  # Maps PostgreSQL data type keys to Elasticsearch data type vals
     'boolean': 'boolean',
     'bytea': 'binary',
     'jsonb': 'object',
-    'json': 'object'
+    'json': 'object',
+    'bigint': 'long',
 }
 
 
