@@ -18,6 +18,9 @@ TYPE_MAP = {  # Maps PostgreSQL data type keys to Elasticsearch data type vals
     'serial primary key': 'integer',
     'integer': 'integer',
     'character varying': 'string',
+    'varchar': 'string',
+    'character': 'string',
+    'char': 'string',
     'text': 'string',
     'integer': 'integer',
     'timestamp with time zone': 'date',
@@ -28,6 +31,15 @@ TYPE_MAP = {  # Maps PostgreSQL data type keys to Elasticsearch data type vals
     'jsonb': 'object',
     'json': 'object',
     'bigint': 'long',
+    'smallint': 'integer',
+    'decimal': 'float',
+    'numeric': 'float',
+    'real': 'integer',
+    'double precision': 'double',
+    'smallserial': 'integer',
+    'serial': 'integer',
+    'bigserial': 'long',
+    'money': 'long',
 }
 
 
