@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="es-map-writer",
-    version='1.0.0.a4',
+    version='1.0.0a4',
     author='TJ Soptame',
     author_email='tj.soptame@gmail.com',
     description='A command line tool that writes an Elasticsearch index mapping for a PostgreSQL database table.',
